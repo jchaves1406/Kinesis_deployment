@@ -8,9 +8,9 @@ En esta parte del ejercicio, utilizamos dos máquinas EC2 para producir datos de
 
 La estructura de producción de datos se divide de la siguiente manera:
 
-- **Máquina EC2 1 (stream_producer AMD):** Esta máquina se encarga de producir los datos de la acción de AMD. El script `stream_producer_amd.py` se ejecuta en esta máquina y se encarga de descargar los datos históricos de las acciones de AMD desde 2021. Luego, genera un flujo continuo de datos simulando un entorno en tiempo real y los envía al flujo de Kinesis correspondiente.
+- **Máquina EC2 1 (stream_producer AMD):** Esta máquina se encarga de producir los datos de la acción de AMD. El script `stream_producer.py` se modifica el simbolo a consultar por `AMD` y se ejecuta en esta máquina y se encarga de descargar los datos históricos de las acciones de AMD desde 2021. Luego, genera un flujo continuo de datos simulando un entorno en tiempo real y los envía al flujo de Kinesis correspondiente.
 
-- **Máquina EC2 2 (stream_producer NVIDIA):** Esta máquina se encarga de producir los datos de la acción de NVIDIA. El script `stream_producer_nvidia.py` se ejecuta en esta máquina y realiza un proceso similar al de la máquina EC2 1, pero para las acciones de NVIDIA. Descarga los datos históricos, genera un flujo continuo de datos y los envía al flujo de Kinesis correspondiente.
+- **Máquina EC2 2 (stream_producer NVIDIA):** Esta máquina se encarga de producir los datos de la acción de NVIDIA. El script `stream_producer.py` se modifica el simbolo a consultar por `NVDA` se ejecuta en esta máquina y realiza un proceso similar al de la máquina EC2 1, pero para las acciones de NVIDIA. Descarga los datos históricos, genera un flujo continuo de datos y los envía al flujo de Kinesis correspondiente.
 
 ## Consumo y análisis de datos
 
@@ -18,6 +18,6 @@ En esta parte del ejercicio, utilizamos otras dos máquinas EC2 para consumir y 
 
 La estructura de consumo y análisis de datos se divide de la siguiente manera:
 
-- **Máquina EC2 3 (stream_consumer Bollinger superior):** Esta máquina se encarga de consumir los datos del flujo de Kinesis y realizar el cálculo de las franjas de Bollinger superiores. El script `stream_consumer_bollinger_upper.py` se ejecuta en esta máquina y lee los datos en tiempo real. Para cada registro, calcula las franjas de Bollinger utilizando el método correspondiente y compara el valor de cierre de la acción con la franja superior. Si el valor de cierre supera el límite establecido, se muestra una alerta.
+- **Máquina EC2 3 (stream_consumer Bollinger superior):** Esta máquina se encarga de consumir los datos del flujo de Kinesis y realizar el cálculo de las franjas de Bollinger superiores. El script `stream_consumer_upper.py` se ejecuta en esta máquina y lee los datos en tiempo real. Para cada registro, calcula las franjas de Bollinger utilizando el método correspondiente y compara el valor de cierre de la acción con la franja superior. Si el valor de cierre supera el límite establecido, se muestra una alerta.
 
-- **Máquina EC2 4 (stream_consumer Bollinger inferior):** Esta máquina se encarga de consumir los datos del flujo de Kinesis y realizar el cálculo de las franjas de Bollinger inferiores. El script `stream_consumer_bollinger_lower.py` se ejecuta en esta máquina y realiza un proceso similar al de la máquina EC2 3, pero para las franjas inferiores. Lee
+- **Máquina EC2 4 (stream_consumer Bollinger inferior):** Esta máquina se encarga de consumir los datos del flujo de Kinesis y realizar el cálculo de las franjas de Bollinger inferiores. El script `stream_consumer_lower.py` se ejecuta en esta máquina y realiza un proceso similar al de la máquina EC2 3, pero para las franjas inferiores. Lee
